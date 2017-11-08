@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>THERE IS NO REAL TIME</title>
+    <meta name="description" content="">
+    <!--  <link rel="stylesheet" href="css/styles.css"> -->
+    </style>
+</head>
+
+<body>
+    <h1>It is SHOW TIME</h1>
+    <!-- <script src="js/scripts.js"></script> -->
+    <form method="POST" action="/setValues">
+        <input type="text" name="hours" placeholder="hours in a day" />
+        <input type="text" name="minutes" placeholder="minutes in an hour" />
+        <input type="text" name="seconds" placeholder="seconds in a minute" />
+        <input type="submit" name="submitbutton" value="Set time increments" />
+    </form>
+
+    <form method="POST" action="/setPresetFromForm">
+        <select type="select" >
+            <option value="tidal">Tidal</option>
+            <option value="sun">Sun</option>
+            <option value="random">Random</option>
+            <option value="freeze">Freeze</option>
+            <option value="boring">Boring</option>
+            <option value="over">I want this day to be over</option>
+            <option value="mars">Mars</option>
+            <option value="forever">I want this day to last forever</option>
+            <option value="institution">I subscribe to the institution of time</option>
+        </select>
+        <input type="submit" name="presetbutton" />
+    </form>
+    
+</body>
+
+</html>
