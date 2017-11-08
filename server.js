@@ -46,39 +46,6 @@ function serverStart() {
   console.log('Server listening on port '+ port);
 }
 
-
-function handleGet (request, response) {
-	console.log('got a GET request');
-	// the parameters of a GET request are passed in
-	// request.query. Pass that to formatResponse()
-	// for formatting:
-	var content = formatResponse(request.query);
-	console.log(content);
-
-	// send the response:
-	response.send(content);
-	response.end();
-}
-
-function handlePost(request, response) {
-	console.log('Got a POST request');
-	// the parameters of a GET request are passed in
-	// request.body. Pass that to formatResponse()
-	// for formatting:
-	var content = formatResponse(request.body);
-	console.log(content);
-
-	// send the response:
-	response.send(content);
-	response.end();
-}
-
-
-
-
-/* ----- TOM ABOVE --- */
-
-
 // start the server:
 var server = app.listen(8080, serverStart);
 
@@ -87,24 +54,44 @@ app.get('/getTimeDivision', returnTimeDivs);
 app.get('/currentTime', returnCurrentTime);
 app.get('/preset/:preset', getPresetValues);
 
-// change the time increment values
+// use forms to post
 app.post('/setValues', setValuesPost); 		// basic form
 app.post('/setPresetFromForm', setValuesPreset); // form
 
+// these use CURL
+// change time iincrements
 app.post('/setValuesAsPreset', setValuesPreset);
-
-app.post('/whatever', function() {console.log("hi")});
-
-/*app.post('/setDayLength/:hour', setDayLength);
+app.post('/setDayLength/:hour', setDayLength);
 app.post('/setHourLength/:minute', setHourLength);
 app.post('/setMinuteLength/:second', setMinuteLength);
 
+// these use CURL
 // change the current time
 app.post('/setHour/:hour', setHour);
 app.post('/setMinute/:minute', setMinute);
 app.post('/setSecond/:second', setSecond);
-*/
 
+
+/* GET ROUTES */
+function returnTimeDivs (request, response) {
+	response.send(timeObject.timeDivision);
+}
+function returnCurrentTime (request, response) {
+	// do some math here
+	response.send(timeObject.currentTime);
+}
+function getPresetValues(request, response) {
+	var preset = request.params.preset;
+	if (preset == "tidal") {
+		// send client back the revised time divison
+		response.send(presetValues.tidal);
+	}
+	// do rest of presets
+	// STEPH?
+}
+
+
+/* POST ROUTES */
 function setValuesPost (request, response) {
 	console.log("change time passage values");
 	console.log(request.body);
@@ -118,17 +105,6 @@ function setValuesPost (request, response) {
 	resetTime();
 
 	response.send(timeObject.timeDivision);
-}
-
-
-
-function getPresetValues(request, response) {
-	var preset = request.params.preset;
-	if (preset == "tidal") {
-		// send client back the revised time divison
-		response.send(presetValues.tidal);
-	}
-	// do rest of presets
 }
 
 function setValuesPreset(request, response) {
@@ -145,36 +121,75 @@ function setValuesPreset(request, response) {
 }
 
 
-function returnTimeDivs (request, response) {
-	response.send(timeObject.timeDivision);
-}
+function setHour(request, reponse) {
+	console.log("change current hour value to " + request.body);
+	
+	if (request.body > timeObject.timeDivision.hrInDay) {
+		console.log("value is greater than allowed")
+		timeObject.currentTime.hour = 0;
+	} else {
+		timeObject.currentTime.hour = request.body;
+	}
 
-function returnCurrentTime (request, response) {
 	response.send(timeObject.currentTime);
 }
 
-function setDay(request, reponse) {
-	console.log(request.body);
-
-	// change
-	//timeObject.timeDivision.hrInDay = hour;
-	//response.send(timeObject.timeDivision); 
+function setMinute(request, reponse) {
+	console.log("change current minute value to " + request.body);
+	
+	if (request.body > timeObject.timeDivision.minInHr) {
+		console.log("value is greater than allowed")
+		timeObject.currentTime.minute = 0;
+	} else {
+		timeObject.currentTime.minute = request.body;
+	}
+	
+	response.send(timeObject.currentTime);
 }
 
-function setHour(request, reponse) {
-	console.log(request.body);
-
-	// change
-	//timeObject.timeDivision.hrInDay = hour;
-	//response.send(timeObject.timeDivision); 
+function setSecond(request, reponse) {
+	console.log("change current second value to " + request.body);
+	
+	if (request.body > timeObject.timeDivision.minInHr) {
+		console.log("value is greater than allowed")
+		timeObject.currentTime.second = 0;
+	} else {
+		timeObject.currentTime.second = request.body;
+	}
+	
+	response.send(timeObject.currentTime);
 }
 
 
+function setDayLength(request, response) {
+	console.log("change day length to " + request.body + " hours");
+	
+	timeObject.timeDivision.hrInDay = request.body;
+	resetTime();
+
+	response.send(timeObject.timeDivision);
+}
+
+function setHourLength(request, response) {
+	console.log("change hour length to " + request.body + " minutes");
+	
+	timeObject.timeDivision.minInHr = request.body;
+	resetTime();
+
+	response.send(timeObject.timeDivision);
+}
+
+function setMinLength(request, response) {
+	console.log("change minute length to " + request.body + " seconds");
+	
+	timeObject.timeDivision.secInMin = request.body;
+	resetTime();
+
+	response.send(timeObject.timeDivision);
+}
 
 function resetTime() {
-
 	timeObject.changedAt = Date.now();
-
 	timeObject.currentTime.curHour = 0;
 	timeObject.currentTime.curMin = 0;
 	timeObject.currentTime.curSec = 0;
