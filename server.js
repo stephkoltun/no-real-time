@@ -87,7 +87,7 @@ function getPresetValues(request, response) {
 		response.send(presetValues.tidal);
 	}
 	// do rest of presets
-	// STEPH?
+
 }
 
 
