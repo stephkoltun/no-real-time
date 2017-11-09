@@ -52,6 +52,7 @@ var server = app.listen(8080, serverStart);
 // gives you information
 app.get('/getTimeDivision', returnTimeDivs);
 app.get('/currentTime', returnCurrentTime);
+app.get('/preset', getAllPresets);
 app.get('/preset/:preset', getPresetValues);
 
 // use forms to post
@@ -61,6 +62,7 @@ app.post('/setPresetFromForm', setValuesPreset); // form
 // these use CURL
 // change time iincrements
 app.post('/setValuesAsPreset', setValuesPreset);
+app.post()	// TO DO route which allows users to set all time lengths at once
 app.post('/setDayLength/:hour', setDayLength);
 app.post('/setHourLength/:minute', setHourLength);
 app.post('/setMinuteLength/:second', setMinuteLength);
@@ -70,6 +72,8 @@ app.post('/setMinuteLength/:second', setMinuteLength);
 app.post('/setHour/:hour', setHour);
 app.post('/setMinute/:minute', setMinute);
 app.post('/setSecond/:second', setSecond);
+app.post()	// TO DO route which allows users to set all time values at once
+// do we deal with typing in colons and all H-M-S
 
 
 /* GET ROUTES */
@@ -79,6 +83,9 @@ function returnTimeDivs (request, response) {
 function returnCurrentTime (request, response) {
 	// do some math here
 	response.send(timeObject.currentTime);
+}
+function getAllPresets(request, response) {
+	response.sent(presetValues);
 }
 function getPresetValues(request, response) {
 	var preset = request.params.preset;
