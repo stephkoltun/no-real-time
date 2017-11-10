@@ -6,6 +6,7 @@
     <title>THERE IS NO REAL:TIME</title>
     <meta name="description" content="">
      <link rel="stylesheet" href="./style/styles.css">
+     <script src="./js/jquery-3.2.1.min.js"></script>
     </style>
 </head>
 
@@ -14,15 +15,19 @@
     <div class="title">
       <marquee>THERE IS NO <span id="RT">REAL:TIME</span> API.</marquee>
     </div>
-    <!-- <script src="js/scripts.js"></script> -->
-    <form method="POST" action="/setLengths">
+    <div>
+      <p>Current Time is: <span id="hour"></span> <span id="minutes"></span> <span id="seconds"></span> </p>
+      <p>Days Passed since last change: <span id="days"></span></p>
+    </div>
+
+    <form method="POST" action="/setValues">
         <input type="text" name="hours" placeholder="hours in a day" />
         <input type="text" name="minutes" placeholder="minutes in an hour" />
         <input type="text" name="seconds" placeholder="seconds in a minute" />
         <input type="submit" name="submitbutton" value="Set time increments" />
     </form>
 
-    <form method="POST" action="/setValuesAsPreset">
+    <form method="POST" action="/setPresetFromForm">
         <select type="select" >
             <option value="tidal">Tidal</option>
             <option value="sun">Sun</option>
@@ -37,6 +42,24 @@
         <input type="submit" name="presetbutton" />
     </form>
   </div>
+
+  <script>
+
+  setInterval(function(){
+    $.get( "http://localhost:8080/currentTime", function( data ) {
+      // console.log(data)
+      $('#hour').text(data.curHour + " :")
+      $('#minutes').text(data.curMin + " :")
+      $('#seconds').text(data.curSec )
+      $('#days').text(Math.round(data.daysPassed) )
+
+    });
+  }, 1000);
+
+
+  </script>
+
 </body>
+
 
 </html>
