@@ -3,14 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <title>THERE IS NO REAL TIME</title>
+    <title>THERE IS NO REAL:TIME</title>
     <meta name="description" content="">
-    <!--  <link rel="stylesheet" href="css/styles.css"> -->
+     <link rel="stylesheet" href="./style/styles.css">
     </style>
 </head>
 
 <body>
-    <h1>It is SHOW TIME</h1>
+  <div class="container">
+    <div class="title">
+      <marquee>THERE IS NO <span id="RT">REAL:TIME</span> API.</marquee>
+    </div>
     <!-- <script src="js/scripts.js"></script> -->
     <form method="POST" action="/setValues">
         <input type="text" name="hours" placeholder="hours in a day" />
@@ -33,7 +36,7 @@
         </select>
         <input type="submit" name="presetbutton" />
     </form>
-    
+  </div>
 </body>
 
 </html>
