@@ -7,10 +7,10 @@ var timeObject = {
 		secInMin: 60,
 	},
 	currentTime: {
-		date: new Date(),
-/*		curHour: this.date.getHours(),
-		curMin: this.date.getMinutes(),
-		curSec: this.date.getSeconds()*/
+		daysPassed: 0,
+		curHour: 0,
+		curMin: 0,
+		curSec: 0
 	},
 	universalSeconds: {
 		secondsInAMinute: 60,
