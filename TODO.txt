@@ -1,0 +1,16 @@
+// TODO
+- deal with error submission (strings, special characters, etc)
+- update the values in the presets
+- style website
+
+
+
+
+git pull
+
+git add .
+git commit -m "I changed this"
+git push
+
+git fetch --all
+git reset --hard origin/master

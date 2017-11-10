@@ -16,10 +16,6 @@ app.get('/currentTime', getRequest.returnCurrentTime);
 app.get('/preset', getRequest.getAllPresets);
 app.get('/preset/:preset', getRequest.getPresetValues);
 
-// use forms to post
-
-app.post('/setPresetFromForm', postRequest.setValuesPreset); // form
-
 // these use CURL
 // change time iincrements
 app.post('/setValuesAsPreset', postRequest.setValuesPreset);
