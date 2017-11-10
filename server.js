@@ -62,7 +62,7 @@ app.post('/setPresetFromForm', setValuesPreset); // form
 // these use CURL
 // change time iincrements
 app.post('/setValuesAsPreset', setValuesPreset);
-app.post()	// TO DO route which allows users to set all time lengths at once
+// TO DO route which allows users to set all time lengths at once
 app.post('/setDayLength/:hour', setDayLength);
 app.post('/setHourLength/:minute', setHourLength);
 app.post('/setMinuteLength/:second', setMinuteLength);
@@ -72,7 +72,7 @@ app.post('/setMinuteLength/:second', setMinuteLength);
 app.post('/setHour/:hour', setHour);
 app.post('/setMinute/:minute', setMinute);
 app.post('/setSecond/:second', setSecond);
-app.post()	// TO DO route which allows users to set all time values at once
+// TO DO route which allows users to set all time values at once
 // do we deal with typing in colons and all H-M-S
 
 
@@ -186,7 +186,7 @@ function setHourLength(request, response) {
 	response.send(timeObject.timeDivision);
 }
 
-function setMinLength(request, response) {
+function setMinuteLength(request, response) {
 	console.log("change minute length to " + request.body + " seconds");
 	
 	timeObject.timeDivision.secInMin = request.body;
