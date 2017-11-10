@@ -15,14 +15,14 @@
       <marquee>THERE IS NO <span id="RT">REAL:TIME</span> API.</marquee>
     </div>
     <!-- <script src="js/scripts.js"></script> -->
-    <form method="POST" action="/setValues">
+    <form method="POST" action="/setLengths">
         <input type="text" name="hours" placeholder="hours in a day" />
         <input type="text" name="minutes" placeholder="minutes in an hour" />
         <input type="text" name="seconds" placeholder="seconds in a minute" />
         <input type="submit" name="submitbutton" value="Set time increments" />
     </form>
 
-    <form method="POST" action="/setPresetFromForm">
+    <form method="POST" action="/setValuesAsPreset">
         <select type="select" >
             <option value="tidal">Tidal</option>
             <option value="sun">Sun</option>

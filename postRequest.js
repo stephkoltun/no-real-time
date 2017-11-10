@@ -3,6 +3,17 @@ var presetValues = require('./presetValues.js');
 var resetTime = require('./resetTime.js');
 
 module.exports = {
+    setTime: function(reqest, response) {
+      console.log("change current time");
+      console.log(request.body);
+
+      timeObject.currentTime.hour = request.body.hour;
+      timeObject.currentTime.minute = request.body.minute;
+      timeObject.currentTime.hour = request.body.second;
+
+      response.send(timeObject.currentTime);
+    },
+
     setValuesPost: function(request, response) {
       console.log("change time passage values");
     	console.log(request.body);

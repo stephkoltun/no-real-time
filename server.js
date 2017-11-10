@@ -17,19 +17,21 @@ app.get('/preset', getRequest.getAllPresets);
 app.get('/preset/:preset', getRequest.getPresetValues);
 
 // use forms to post
-app.post('/setValues', postRequest.setValuesPost); 		// basic form
+
 app.post('/setPresetFromForm', postRequest.setValuesPreset); // form
 
 // these use CURL
 // change time iincrements
 app.post('/setValuesAsPreset', postRequest.setValuesPreset);
 // TO DO route which allows users to set all time lengths at once
+app.post('/setLengths', postRequest.setValuesPost); 		// set all time lengths at once
 app.post('/setDayLength/:hour', postRequest.setDayLength);
 app.post('/setHourLength/:minute', postRequest.setHourLength);
 app.post('/setMinuteLength/:second', postRequest.setMinuteLength);
 
 // these use CURL
 // change the current time
+app.post('/setTime', postRequest.setTime);
 app.post('/setHour/:hour', postRequest.setHour);
 app.post('/setMinute/:minute', postRequest.setMinute);
 app.post('/setSecond/:second', postRequest.setSecond);
