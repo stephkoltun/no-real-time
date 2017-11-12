@@ -6,6 +6,8 @@
 
 
 
+open .
+
 git pull
 
 git add .
