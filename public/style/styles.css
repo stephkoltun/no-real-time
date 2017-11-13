@@ -6,13 +6,21 @@ body {
   background-size: 80px 80px;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: 70% 40%;
+  background-position: 90% 12%;
 
 
 }
 
 p {
-  font-size: 0.4rem;
+  font-size: 1.3rem;
+}
+
+#quote{
+  font-size: 1.6rem;
+  width: 70%;
+  font-style: italic;
+  text-align: justify;
+  font-family: Times;
 }
 
 .container {
@@ -21,7 +29,8 @@ p {
 }
 
 .title {
-  width: 25%;
+  width: 60%;
+  font-size: 3.5rem;
 }
 
 #RT {
@@ -29,4 +38,38 @@ p {
   text-decoration: underline;
   font-style: italic;
   font-weight: bold;
+}
+
+#footer {
+  font-size: 1rem;
+}
+
+#link {
+  color: #f7133b;
+}
+
+#hour, #minutes, #seconds, #days {
+  color: #f7133b;
+  font-weight: bold;
+}
+
+input[type="number"] {
+  padding: 16px;
+  border: none;
+  color: #f7133b;
+  font-weight: bold;
+  font-size: 1rem;
+}
+input[type="submit"] {
+  background-color: #f7143d;
+  border: none;
+  padding: 12px;
+  color: white;
+  font-size: 1rem;
+}
+
+select {
+  height: 46px;
+  font-size: 1rem;
+  border: none;
 }

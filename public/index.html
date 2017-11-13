@@ -16,18 +16,21 @@
       <marquee>THERE IS NO <span id="RT">REAL:TIME</span> API.</marquee>
     </div>
     <div>
-      <p>Current Time is: <span id="hour"></span> <span id="minutes"></span> <span id="seconds"></span> </p>
-      <p>Days Passed since last change: <span id="days"></span></p>
+      <p>Current Time is ↝ <span id="hour"></span> <span id="minutes"></span> <span id="seconds"></span> </p>
+      <p>Days Passed since last change ↝ <span id="days"></span></p>
     </div>
 
+    <hr>
     <form method="POST" action="/setLengths">
-        <input type="text" name="hours" placeholder="hours in a day" />
-        <input type="text" name="minutes" placeholder="minutes in an hour" />
-        <input type="text" name="seconds" placeholder="seconds in a minute" />
-        <input type="submit" name="submitbutton" value="Set time increments" />
-    </form>
+      <h4>Set your own time by HH:MM:SS</h4>
+        <input type="number" name="hours" placeholder="hours in a day" />
+        <input type="number" name="minutes" placeholder="minutes in an hour" />
+        <input type="number" name="seconds" placeholder="seconds in a minute" /><br><br>
+        <input type="submit" name="submitbutton" value="Set Custom Time" /><br><br>
 
+    <hr>
     <form method="POST" action="/setValuesAsPreset">
+      <h4>Set your own time by Presets</h4>
         <select type="select" >
             <option value="tidal">Tidal</option>
             <option value="sun">Sun</option>
@@ -38,24 +41,34 @@
             <option value="mars">Mars</option>
             <option value="forever">I want this day to last forever</option>
             <option value="institution">I subscribe to the institution of time</option>
-        </select>
-        <input type="submit" name="presetbutton" />
+        </select><br><br>
+        <input type="submit" name="presetbutton" value="Set Preset Time" /><br><br>
     </form>
+
+    <hr>
+
+    <div>
+      <p id="quote">“The clock, forever, is a piece of power-machinery whose “product” is seconds and minutes: by its essential nature it dissociated time from human events and helped create the believe in an independent world of mathematically measurable sequences: the special world of science. There is relatively little foundation for this belief in common human experiences: throughout the year the days are of uneven duration, and not merely does the relation between day and night steadily change, but a slight journey from East to West alters astronomical time by a certain number of minutes. In terms of the human organism itself, mechanical time is even more foreign: while human life has regularities of its won, the beat of the pulse, the breathing of the lungs, these change from hour to hour with mood and action, and in the longer span of days, time is measured not by the calendar but by the events that occupy it.” <span id="RT">(Lewis Mumford, Technics and Civilization, p 15)<span></p>
+    </div>
+
+    <hr>
+
+    <p id="footer">Read the documentation on the <a href="https://github.com/stephkoltun/no-real-time"><span id="link">Github Page</span></a></p>
+
   </div>
+
+
 
   <script>
 
   setInterval(function(){
     $.get( "http://localhost:8080/currentTime", function( data ) {
-      // console.log(data)
       $('#hour').text(data.curHour + " :")
       $('#minutes').text(data.curMin + " :")
       $('#seconds').text(data.curSec )
       $('#days').text(Math.round(data.daysPassed) )
-
     });
   }, 1000);
-
 
   </script>
 
