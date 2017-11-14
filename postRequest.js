@@ -2,8 +2,9 @@ var timeObject = require('./timeObject.js');
 var presetValues = require('./presetValues.js');
 var resetTime = require('./resetTime.js');
 
+
 module.exports = {
-    setTime: function(reqest, response) {
+    setTime: function(request, response) {
       console.log("change current time");
       console.log(request.body);
 
@@ -37,60 +38,62 @@ module.exports = {
     },
 
     setHour: function(request, response) {
-      console.log("change current hour value to " + request.body);
+      console.log("change current hour value to " + parseInt(request.params.hour));
+
       if (request.body > timeObject.timeDivision.hrInDay) {
         console.log("value is greater than allowed")
         timeObject.currentTime.hour = 0;
       } else {
-        timeObject.currentTime.hour = request.body;
+        timeObject.currentTime.hour = parseInt(request.params.hour);
       }
       response.send(timeObject.currentTime);
     },
 
     setMinute: function(request, response) {
-      console.log("change current minute value to " + request.body);
+      console.log("change current minute value to " + parseInt(request.params.minute));
 
     	if (request.body > timeObject.timeDivision.minInHr) {
     		console.log("value is greater than allowed")
     		timeObject.currentTime.minute = 0;
     	} else {
-    		timeObject.currentTime.minute = request.body;
+    		timeObject.currentTime.minute = parseInt(request.params.minute);
     	}
 
     	response.send(timeObject.currentTime);
     },
 
     setSecond: function(request, response){
-      console.log("change current second value to " + request.body);
+      console.log("change current second value to " + parseInt(request.params.seconds));
       if (request.body > timeObject.timeDivision.minInHr) {
         console.log("value is greater than allowed")
         timeObject.currentTime.second = 0;
       } else {
-        timeObject.currentTime.second = request.body;
+        timeObject.currentTime.second = parseInt(request.params.second);
       }
       response.send(timeObject.currentTime);
     },
 
     setDayLength: function(request, response){
-      console.log("change day length to " + request.body + " hours");
-    	timeObject.timeDivision.hrInDay = request.body;
+      console.log("change day length to " + parseInt(request.params.hour)+ " hours");
+
+    	timeObject.timeDivision.hrInDay = parseInt(request.params.hour);
     	resetTime.resetTime();
     	response.send(timeObject.timeDivision);
     },
 
     setHourLength: function(request, response){
-      console.log("change hour length to " + request.body + " minutes");
+      console.log("change hour length to " + parseInt(request.params.minute) + " minutes");
 
-    	timeObject.timeDivision.minInHr = request.body;
+    	timeObject.timeDivision.minInHr = parseInt(request.params.minute);
     	resetTime.resetTime();
 
     	response.send(timeObject.timeDivision);
     },
 
     setMinuteLength: function(request, response){
-      console.log("change minute length to " + request.body + " seconds");
+      console.log("change minute length to " + parseInt(request.params.second) + " seconds");
 
-      timeObject.timeDivision.secInMin = request.body;
+      timeObject.timeDivision.secInMin = parseInt(request.params.second);
       resetTime.resetTime();
 
       response.send(timeObject.timeDivision);
