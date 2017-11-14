@@ -1,4 +1,4 @@
-THERE IS NOT REAL TIME
+THERE IS NO REAL TIME. It is just an agreement.
 
 ![](./assets/clock.gif)
 
